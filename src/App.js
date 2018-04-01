@@ -5,20 +5,36 @@ import './App.css';
 
 class App extends Component {
 
+  constructor() {
+    super();
+    this.state = {
+      text:"Initial text"
+    };
+  }
+
+  // refs.textBox is refers to input element below
+  clicked() {
+    this.setState({text: this.refs.textBox.value });
+  }
+
+  // prevents text from defaulting to "initial text" after button clicked 
   handleSubmit(event) {
-  event.preventDefault();
-  console.log("form was submitted");
+    event.preventDefault();
+    console.log('form submitted')
   }
 
   render() {
     return (
 
-      <div className="App">
-        <form onSubmit={this.handleSubmit}>
-          <input />
 
-          <button> Click me to summarize! </button>
-        </form>
+      <div className="App">
+      {this.state.text}
+        <div className="form_wrapper">
+          <form onSubmit={this.handleSubmit}>
+            <input ref="textBox" type="text" />
+            <button onClick={ (e) => { this.clicked(); } } > Click me to summarize! </button>
+          </form>
+        </div>
       </div>
 
       // <div className="App">
