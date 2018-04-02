@@ -17,6 +17,27 @@
     top: calc(50% - 1em);
 }
 
+
+
+#left {
+  position:absolute;
+  left: 10px;
+  top:30px;
+  word-wrap: break-word;
+  white-space: pre-line;
+}
+
+#right {
+  float:right;
+  position:absolute;
+  right: 10px;
+  top:30px;
+}
+
+input {
+  width:500px;
+}
+
 /*.App-logo {
   animation: App-logo-spin infinite 20s linear;
   height: 80px;
