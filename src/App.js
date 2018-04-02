@@ -1,36 +1,31 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 
 
 import logo from './logo.svg';
 import './App.css';
 
-var $ = require('jquery')
 
 class App extends Component {
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
-      text:"Initial text"
+      posts: []
     };
   }
 
-  // refs.textBox is refers to input element below
-  clicked() {
-    //this.setState({text: this.refs.textBox.value });
-    $.ajax({
-    type:"POST",
-    dataType: "json",
-    crossDomain:true,
-    //data:{'name':'Payam'},
-    url: "http://127.0.0.1:5000/hello/",
-    success: function(data){
-        console.log(data);
-    }
-  })
-
-
+  // change response type to text here & make sure test.py returns a string & not json formatted data
+  componentDidMount() {
+    axios.get("http://127.0.0.1:5000/hello/", {
+      responseType:"text"
+    })
+      .then(res => {
+        //console.log(posts)
+        this.setState({ posts: res.data });
+      });
   }
+
 
   // prevents text from defaulting to "initial text" after button clicked 
   handleSubmit(event) {
@@ -41,17 +36,24 @@ class App extends Component {
   render() {
     return (
 
-
-      <div className="App">
-      {this.state.text}
-        <div className="form_wrapper">
-          <form onSubmit={this.handleSubmit}>
-            <input ref="textBox" type="text" />
-            //<button onClick={ (e) => { this.clicked(); } } > Click me to summarize! </button>
-            <button onClick={this.clicked}> Click me bitch! </button>
-          </form>
-        </div>
+        <div>
+        <h1>{`/r/reactjs}`}</h1>
+        <ul>
+          {this.state.posts}
+        </ul>
       </div>
+
+
+      // <div className="App">
+      // //{this.state.text}
+      //   <div className="form_wrapper">
+      //     <form onSubmit={this.handleSubmit}>
+      //       <input ref="textBox" type="text" />
+      //       //<button onClick={ (e) => { this.clicked(); } } > Click me to summarize! </button>
+      //       <button onClick={this.clicked}> Click me bitch! </button>
+      //     </form>
+      //   </div>
+      // </div>
 
       // <div className="App">
       //   <header className="App-header">

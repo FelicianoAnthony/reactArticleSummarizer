@@ -16,8 +16,9 @@ def after_request(response):
 
 @app.route('/hello/', methods=['GET', 'POST'])
 def hello_world(name=None):
-	di = {'some': 'text'}
-	return json.dumps(di)
+	di = [{'some': 'text'}]
+	return 'hi from python!'
+	#return json.dumps(di)
     # buf1 = request.args.get('name')
     # str = {'key':'Hello World!', 'q':buf1}
     # #out = {'key':str}
