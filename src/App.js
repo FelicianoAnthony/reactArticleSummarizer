@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import './App.css';
+import $ from 'jquery';
 
 
 class App extends Component {
@@ -18,11 +19,21 @@ class App extends Component {
   // change response type to text here & make sure test.py returns a string & not json formatted data
   click() {
 
-    axios.get("http://127.0.0.1:5000/hello/")
-      .then(res => {
-        console.log(res.data)
-        this.setState({ posts: res.data,  isLoading: false });
-      });
+    // axios.get("http://127.0.0.1:5000/hello/", {arg1: 'long ass url'})
+    //   .then(res => {
+    //     console.log(res.data)
+    //     this.setState({ posts: res.data,  isLoading: false });
+    //   });
+    var urlBox = document.getElementById("box").value;
+
+    $.ajax({
+    type: "GET",
+    data: { arg1: urlBox} ,
+    url: "http://127.0.0.1:5000/hello/",
+    }).done(function(res) {
+      this.setState({ posts: res,  isLoading: false });
+      console.log(res)
+    }.bind(this));
 
   }
 
@@ -49,7 +60,7 @@ class App extends Component {
         </div>
 
         <div id = "right"> Python data returned from flask server via axios get request  
-        <p > {this.state.posts.map(x => x.some)} </p>
+        <p > {this.state.posts.result} </p>
         </div>
 
       
@@ -57,7 +68,7 @@ class App extends Component {
         <div className="form_wrapper">
           <form onSubmit={this.handleSubmit}>
             <p className = "input-title"> Enter a URL to summarize! </p>
-            <input ref="textBox" type="text" value={this.state.textInput} onChange={ (e) => this.handleChange(e.target.value) } />
+            <input id = "box" ref="textBox" type="text" value={this.state.textInput} onChange={ (e) => this.handleChange(e.target.value) } />
             <div> 
                 <button onClick={this.click} disabled={this.state.isLoading}> click me </button>
             </div>
