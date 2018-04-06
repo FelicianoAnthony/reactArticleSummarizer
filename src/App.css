@@ -2,6 +2,22 @@
   /*text-align: center;*/
 }
 
+.summary-box{
+  font-size:20px;
+}
+
+.summary-text {
+    vertical-align:top;
+    text-align:justify;
+}
+
+textarea {
+  height:30em;
+  width:50em;
+  resize:none;
+
+}
+
 .App { 
     position: fixed;
     top: 0px;

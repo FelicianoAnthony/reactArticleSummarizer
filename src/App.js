@@ -1,8 +1,14 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import './App.css';
+import { Switch, BrowserRouter as Router, Link, NavLink, Redirect } from 'react-router-dom';
+import Route from 'react-router-dom/Route';
+import TestComp from './TestComp';
 import $ from 'jquery';
 
+const User = () => {
+  return (<h1> Welcome Bitch </h1>)
+}
 
 class App extends Component {
 
@@ -11,9 +17,12 @@ class App extends Component {
     this.state = {
       posts: [],
       isLoading: false,
-      textInput:[]
+      textInput:[],
+      clicked: false
+
     };
     this.click = this.click.bind(this);
+    this.handleClick = this.handleClick.bind(this);
   }
 
   // change response type to text here & make sure test.py returns a string & not json formatted data
@@ -24,16 +33,7 @@ class App extends Component {
     //     console.log(res.data)
     //     this.setState({ posts: res.data,  isLoading: false });
     //   });
-    var urlBox = document.getElementById("box").value;
 
-    $.ajax({
-    type: "GET",
-    data: { arg1: urlBox} ,
-    url: "http://127.0.0.1:5000/hello/",
-    }).done(function(res) {
-      this.setState({ posts: res,  isLoading: false });
-      console.log(res)
-    }.bind(this));
 
   }
 
@@ -49,33 +49,47 @@ class App extends Component {
 
   }
 
+  handleClick() {
+    this.setState({
+      clicked: true
+    });
+
+    var urlBox = document.getElementById("box").value;
+
+    $.ajax({
+    type: "GET",
+    data: { arg1: urlBox} ,
+    url: "http://127.0.0.1:5000/hello/",
+    }).done(function(res) {
+      this.setState({ posts: res,  isLoading: false });
+      console.log(res)
+    }.bind(this));
+
+  }
+
+
   render() {
 
 
     return (
-      // text from test.py will appear here
-      <div className="App">
-        <div id = "left"> Url to be passed as arg to python script
-        <p> {this.state.textInput}</p>
-        </div>
 
-        <div id = "right"> Python data returned from flask server via axios get request  
-        <p > {this.state.posts.result} </p>
-        </div>
 
-      
-
-        <div className="form_wrapper">
+        <div className="App" >
+          {this.state.clicked ? <div className="summary-box"> Article Summary for  <p id="summary-text"> {this.state.posts.result} </p> </div> :  <div className="form_wrapper"> 
           <form onSubmit={this.handleSubmit}>
             <p className = "input-title"> Enter a URL to summarize! </p>
-            <input id = "box" ref="textBox" type="text" value={this.state.textInput} onChange={ (e) => this.handleChange(e.target.value) } />
-            <div> 
-                <button onClick={this.click} disabled={this.state.isLoading}> click me </button>
-            </div>
+            <input id="box" ref="textBox" type="text" value={this.state.textInput} onChange={ (e) => this.handleChange(e.target.value) } />
+              <div> 
+                <button onClick={this.handleClick}> Click me now!
+                </button>
+              </div>
           </form>
+
+        </div>}
         </div>
-        
-      </div>
+
+
+
 
     );
   }
