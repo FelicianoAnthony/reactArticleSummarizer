@@ -16,10 +16,10 @@
 
 Main Window
 
-![alt text](https://github.com/FelicianoAnthony/reactArticleSummarizer/main_window.png)
+![alt text](https://github.com/FelicianoAnthony/reactArticleSummarizer/blob/ajax-jquery/main_window.png)
 
 
 
 Example Output
 
-![alt text](https://github.com/FelicianoAnthony/reactArticleSummarizer/output_window.png)
+![alt text](https://github.com/FelicianoAnthony/reactArticleSummarizer/blob/ajax-jquery/output_window.png)
