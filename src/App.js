@@ -6,10 +6,6 @@ import Route from 'react-router-dom/Route';
 import TestComp from './TestComp';
 import $ from 'jquery';
 
-const User = () => {
-  return (<h1> Welcome Bitch </h1>)
-}
-
 class App extends Component {
 
   constructor(props) {
@@ -17,36 +13,14 @@ class App extends Component {
     this.state = {
       posts: [],
       isLoading: false,
-      textInput:[],
       clicked: false
-
     };
-    this.click = this.click.bind(this);
     this.handleClick = this.handleClick.bind(this);
   }
-
-  // change response type to text here & make sure test.py returns a string & not json formatted data
-  click() {
-
-    // axios.get("http://127.0.0.1:5000/hello/", {arg1: 'long ass url'})
-    //   .then(res => {
-    //     console.log(res.data)
-    //     this.setState({ posts: res.data,  isLoading: false });
-    //   });
-
-
-  }
-
-  handleChange(value) {
-    this.setState({textInput: value});
-  }
-
-
 
   // prevents text from defaulting to "initial text" after button clicked 
   handleSubmit(event) {
     event.preventDefault();
-
   }
 
   handleClick() {
@@ -62,7 +36,7 @@ class App extends Component {
     url: "http://127.0.0.1:5000/hello/",
     }).done(function(res) {
       this.setState({ posts: res,  isLoading: false });
-      console.log(res)
+      console.log(res.title)
     }.bind(this));
 
   }
@@ -75,17 +49,31 @@ class App extends Component {
 
 
         <div className="App" >
-          {this.state.clicked ? <div className="summary-box"> Article Summary for  <p id="summary-text"> {this.state.posts.result} </p> </div> :  <div className="form_wrapper"> 
+          {this.state.clicked ? 
+            <div className="summary-box"> 
+              <h1 className="article-title"> {this.state.posts.title} </h1>
+                <p id="summary-text"> <span className="col-titles"> Summarized Text <br /> </span> {this.state.posts.text} </p> 
+                <p id="orig-text"> <span className="col-titles"> Original Article <br /> </span> {this.state.posts.orig_text} </p>
+                <ul className="lengths">
+                  <li> The original length was {this.state.posts.orig_len} words </li>
+                  <li> The new length is {this.state.posts.new_len} words </li>
+                  <li> The article's length was reduced by {this.state.posts.pct_change}% </li> 
+               </ul>
+
+           </div> :  <div className="form_wrapper"> 
           <form onSubmit={this.handleSubmit}>
             <p className = "input-title"> Enter a URL to summarize! </p>
-            <input id="box" ref="textBox" type="text" value={this.state.textInput} onChange={ (e) => this.handleChange(e.target.value) } />
+            <input id="box" ref="textBox" type="text"/>
               <div> 
                 <button onClick={this.handleClick}> Click me now!
                 </button>
               </div>
           </form>
 
-        </div>}
+
+        </div> }
+
+
         </div>
 
 

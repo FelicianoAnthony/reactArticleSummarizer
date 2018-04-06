@@ -91,11 +91,27 @@ def summarize_article(name=None):
 		if (sentence in sentenceValue) and (sentenceValue[sentence] > (1.3 * average)):
 			summary += " " + sentence
 
+	diff = len(text) - len(summary) 
+
+	pct_decrease = round(diff / len(text) * 100)
+
+
 	article_dict = {}
 
-	article_dict[article_title] = summary
+	#article_dict[article_title] = summary
+	article_dict['title'] = article_title
+	article_dict['text'] = summary 
+	article_dict['orig_len'] = len(text)
+	article_dict['new_len'] = len(summary)
+	article_dict['orig_text'] = text
+	article_dict['pct_change'] = pct_decrease
 
-	return jsonify(result=summary)
+	#return jsonify(result=summary)
+	return jsonify(article_dict)
+
+@app.route('/hello2/', methods=['GET', 'POST'])
+def getTitle():
+	return True
 
 
 if __name__ == '__main__':
