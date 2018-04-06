@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import $ from 'jquery';
+import $ from 'jquery'; // eslint-disable-line no-unused-vars
 
 
 

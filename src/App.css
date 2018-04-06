@@ -22,7 +22,7 @@
   font-size:12px;
 
 }
-
+/*
 #orig-text{
     position:absolute;
     left:15px;
@@ -43,7 +43,7 @@
     word-wrap: break-word;
 }
 
-.lengths {
+*/.lengths {
   font-size:12px;
   list-style-type:none;
   position:absolute;

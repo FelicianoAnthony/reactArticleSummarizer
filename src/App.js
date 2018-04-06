@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import axios from 'axios';
+import axios from 'axios';// eslint-disable-line no-unused-vars
 import './App.css';
-import { Switch, BrowserRouter as Router, Link, NavLink, Redirect } from 'react-router-dom';
-import Route from 'react-router-dom/Route';
-import TestComp from './TestComp';
+import { Switch, BrowserRouter as Router, Link, NavLink, Redirect } from 'react-router-dom';// eslint-disable-line no-unused-vars
+import Route from 'react-router-dom/Route';// eslint-disable-line no-unused-vars
+import TestComp from './TestComp';// eslint-disable-line no-unused-vars
 import $ from 'jquery';
 
 class App extends Component {
