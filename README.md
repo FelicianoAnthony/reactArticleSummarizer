@@ -10,4 +10,16 @@
 4 - yarn install
 
 
-5 - yarn start
+5 - yarn start	
+
+
+
+Main Window
+
+![alt text](https://github.com/FelicianoAnthony/reactArticleSummarizer/main_window.png)
+
+
+
+Example Output
+
+![alt text](https://github.com/FelicianoAnthony/reactArticleSummarizer/output_window.png)
