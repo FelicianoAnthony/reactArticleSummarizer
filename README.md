@@ -13,8 +13,8 @@
 
 ### Main Window
 
-![alt text](https://github.com/FelicianoAnthony/reactArticleSummarizer/blob/ajax-jquery/main_window.png)
+![alt text](screenshots/main_window.png)
 
 ### Example Output
 
-![alt text](https://github.com/FelicianoAnthony/reactArticleSummarizer/blob/ajax-jquery/output_window.png)
+![alt text](screenshots/output_window.png)
