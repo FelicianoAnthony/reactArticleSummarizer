@@ -1,25 +1,20 @@
-1 - pip install beautifulsoup4 flask nltk
+# Article Summarizer with React & Python
 
+`pip3 install beautifulsoup4 flask nltk requests`
 
-2 - cd into ./src
+`cd src`
 
+`python3 test.py`
+(now python script is accessible at http://127.0.0.1:5000/ for ajax GET request)
 
-3 - python3 test.py (now python script is accessible at http://127.0.0.1:5000/ for ajax GET request)
+`yarn`
 
+`yarn start`
 
-4 - yarn install
-
-
-5 - yarn start	
-
-
-
-Main Window
+### Main Window
 
 ![alt text](https://github.com/FelicianoAnthony/reactArticleSummarizer/blob/ajax-jquery/main_window.png)
 
-
-
-Example Output
+### Example Output
 
 ![alt text](https://github.com/FelicianoAnthony/reactArticleSummarizer/blob/ajax-jquery/output_window.png)
