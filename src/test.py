@@ -9,8 +9,11 @@ import requests
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize, sent_tokenize
 from nltk.stem.snowball import SnowballStemmer
+import nltk
 
 app = Flask(__name__)
+nltk.download('punkt')
+nltk.download('stopwords')
 
 # used because were making 'cross domain requests?'
 @app.after_request # blueprint can also be app~~
