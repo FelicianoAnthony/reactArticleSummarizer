@@ -22,15 +22,19 @@ class App extends Component {
     type: "GET",
     data: { arg1: urlBox} ,
     url: "http://127.0.0.1:5000/hello/",
-    }).then(function(result) {
-      this.setState({ gets: result});
-      console.log(result.title)
-    }.bind(this)).then(function(results) {
-     this.props.history.push({
-      pathname: '/python',
-      state1: {gets: this.state.gets}
     })
-    }.bind(this))
+    .then( (result) => {
+      this.setState({gets:result})
+      console.log(result.title)
+    })
+    
+    .then( () => {
+      this.props.history.push({
+        pathname: '/python',
+        state1: {gets: this.state.gets}
+      })
+    })
+
   }
 
 
