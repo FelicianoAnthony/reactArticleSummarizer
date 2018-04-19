@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import './PythonComponent.css';
+import { withRouter } from 'react-router'
 
 
 class PythonComponent extends Component {
@@ -25,14 +26,14 @@ class PythonComponent extends Component {
     	<div>
 	    	<Link to={{pathname:"/"}}> home </Link>
 
-			<div class="row">
+			<div className="row">
 			    <h2>Summarized Text </h2>
-			    <p>{this.props.test.text}</p>
+			    <p>{this.props.location.state1.gets.text} wtf</p>
           <button onClick={this.handleClick}> Show Original Text </button>
 			  </div>
           {(() => {
           if (this.state.showOrig) {
-              return this.props.test.orig_text
+              return this.props.location.state1.gets.orig_text
           }
           })()}
 

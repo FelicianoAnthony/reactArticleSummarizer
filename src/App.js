@@ -11,8 +11,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      gets:[],
-      renderComp: false,
+      gets:[]
     };
   }
 
@@ -24,9 +23,14 @@ class App extends Component {
     data: { arg1: urlBox} ,
     url: "http://127.0.0.1:5000/hello/",
     }).then(function(result) {
-      this.setState({ gets: result, renderComp: !this.state.renderComp });
+      this.setState({ gets: result});
       console.log(result.title)
-    }.bind(this));
+    }.bind(this)).then(function(results) {
+     this.props.history.push({
+      pathname: '/python',
+      state1: {gets: this.state.gets}
+    })
+    }.bind(this))
   }
 
 
@@ -41,11 +45,6 @@ class App extends Component {
 {/*               <Link to={{pathname:"/python", state : {message: this.state.gets} }}> cant use button have to use link text </Link> */}
             </button>
             <div>
-            {(() => {
-              if (this.state.renderComp) {
-                  return <PythonComponent test={this.state.gets}/>
-              }
-              })()}
             </div>
           </div>
         </div>
