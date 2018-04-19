@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import './PythonComponent.css';
+import PythonComponent2 from './PythonComponent2'
+
 
 
 class PythonComponent extends Component {
@@ -9,36 +11,55 @@ class PythonComponent extends Component {
     super(props);
     this.state = {
       showOrig: false,
-      liked: false
+      toggleButtonText: false, 
+      clicked: true
     };
   }
 
 
   handleClick = () => {
-    this.setState({ showOrig: !this.state.showOrig, liked: !this.state.liked });
+    this.setState({ 
+      showOrig: !this.state.showOrig, 
+      toggleButtonText: !this.state.toggleButtonText , 
+      clicked:!this.state.clicked});
+  }
+
+  ShowDiv ()  {
+    return (
+      <div> stuff </div>
+      )
   }
 
 
   render() {
 
-    const text = this.state.liked ? 'Close original text' : 'Show original text';
+    const text = this.state.toggleButtonText ? 'Close original text' : 'Show original text';
 
 
     return (
-    	<div>
-	    	<Link to={{pathname:"/"}}> home </Link>
 
-			<div className="row">
-			    <h2> {this.props.location.summaryObject.title} </h2>
-			    <p>{this.props.location.summaryObject.text} wtf</p>
-          <button onClick={this.handleClick}> {text} </button>
-			  </div>
-          {(() => {
-          if (this.state.showOrig) {
-              return this.props.location.summaryObject.orig_text
-          }
-          })()}
-		</div>
+
+
+
+            <div className="App" >
+            <Link to={{pathname:"/"}}> home </Link>
+            <button onClick={this.handleClick}> {text} </button>
+
+   
+            <div className="summary-box"> 
+              <h1 className="article-title"> {this.props.location.summaryObject.title} </h1>
+                <p id="summary-text"> <span className="col-titles"> Summarized Text <br /> </span> {this.props.location.summaryObject.text} </p> 
+           </div>  
+
+           {!this.state.clicked ?
+            <div className="summary-box-orig"> 
+              <h1 className="article-title-orig"> {this.props.location.summaryObject.title} </h1>
+                <p id="summary-text"> <span className="col-titles"> Summarized Text <br /> </span> {this.props.location.summaryObject.orig_text} </p> 
+
+           </div> : null }
+
+
+        </div>
 
 
 
