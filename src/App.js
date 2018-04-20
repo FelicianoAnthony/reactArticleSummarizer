@@ -12,7 +12,8 @@ class App extends Component {
     super(props);
     this.state = {
       summaryObject:[],
-      SearchUrl: ''
+      SearchUrl: '',
+      sumByNum: ''
     };
   }
 
@@ -20,10 +21,11 @@ class App extends Component {
 
     $.ajax({
     type: "GET",
-    data: { arg1: this.state.SearchUrl},
+    data: { arg1: this.state.SearchUrl, arg2:parseInt(this.state.sumByNum)},
     url: "http://127.0.0.1:5000/hello/",
     })
     .then( (result) => {
+      console.log(result)
       this.props.history.push({
         pathname: '/python',
         // search: '='  + this.state.SearchUrl,
@@ -36,6 +38,10 @@ class App extends Component {
     this.setState({SearchUrl: e.target.value})
   }
 
+  updateSumByNum = (e) => {
+    this.setState({sumByNum: e.target.value})
+  }
+
 
   render() {
     return (
@@ -43,6 +49,10 @@ class App extends Component {
             <div>
             <p className = "input-title"> Enter a URL</p>
             <input value={this.state.SearchUrl} onChange={this.updateSearchUrl} placeholder = "placeholder text" id="box" ref="textBox" type="text"/>
+              <div> 
+              <p> Summary by sentence number - cant leave blank for now... </p>
+              <input value={this.state.SumByNum} onChange={this.updateSumByNum} placeholder = "10" type="text" /> 
+              </div>
             <button onClick={this.handleClick}> Click to summarize
 {/*               <Link to={{pathname:"/python", state : {message: this.state.gets} }}> cant use button have to use link text </Link> */}
             </button>

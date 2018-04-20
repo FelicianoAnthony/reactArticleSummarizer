@@ -5,6 +5,7 @@ import PythonComponent2 from './PythonComponent2'
 
 
 
+
 class PythonComponent extends Component {
 
   constructor(props) {
@@ -48,13 +49,24 @@ class PythonComponent extends Component {
    
             <div className="summary-box"> 
               <h1 className="article-title"> {this.props.location.summaryObject.title} </h1>
-                <p id="summary-text"> <span className="col-titles"> Summarized Text <br /> </span> {this.props.location.summaryObject.text} </p> 
+
+                <p id="summary-text"> <span className="col-titles"> Summarized Text <br /> 
+                {this.props.location.summaryObject.summary_as_list.map(function(d, idx) {
+                  return (
+                    <ul>
+                      <li key={idx}>{idx} {d}</li>
+                    </ul>
+                    )
+                })}   
+                </span>  </p> 
+
+
            </div>  
 
            {!this.state.clicked ?
             <div className="summary-box-orig"> 
               <h1 className="article-title-orig"> {this.props.location.summaryObject.title} </h1>
-                <p id="summary-text"> <span className="col-titles"> Summarized Text <br /> </span> {this.props.location.summaryObject.orig_text} </p> 
+                <p id="summary-text"> <span className="col-titles"> Original Text <br /> </span> {this.props.location.summaryObject.orig_text} </p> 
 
            </div> : null }
 
