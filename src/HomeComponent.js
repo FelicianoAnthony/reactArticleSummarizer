@@ -17,13 +17,18 @@ class Home extends Component {
     this.state = {
       summaryObject:[],
       SearchUrl: '',
-      sumByNum: ''
+      sumByNum: 0
     };
   }
 
 
   handleClick = () => {
-    console.log(this.state.sumByNum)
+    console.log(this.state.sumByNum, 'from handleClick')
+
+    if (this.state.sumByNum === 0) {
+      console.log(this.state.sumByNum)
+      this.setState({sumByNum:5})
+    }
 
     $.ajax({
     type: "GET",
@@ -55,6 +60,7 @@ class Home extends Component {
       <div>
 
         <form id="form_login">
+        {this.state.sumByNum}
           <p> Paste a url </p>
             <p>
               <input value={this.state.SearchUrl} onChange={this.updateSearchUrl} className= "mytext" type="text" id="server" placeholder="url" />
@@ -69,6 +75,7 @@ class Home extends Component {
                   return <SummaryComponent test={this.state.gets}/>
               }
               })()}
+        
         </form>
 
       </div>
