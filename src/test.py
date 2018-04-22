@@ -127,23 +127,25 @@ def summarize_article(name=None, name1=None):
     article_dict['orig_len'] = orig_length
     article_dict['percent_change_string'] = pct_change
 
-    numSentences = request.args.get('arg2')
+    
+    # check for optional argument 
+    try:
+        numSentences = request.args.get('arg2', type=int)
+    except Exception as e:
+        print(str(e))
     ###########################  this part will break the script #######################
 
     # if user enters "summarize article into x sentences"                
-    #if type(numSentences) == int:
+    if numSentences:
+        summarize_by_length = summarize_by_sentence_number(sentence_value, numSentences)
+        article_dict['summary_as_list'] = summarize_by_length
+        flatten_summed_as_list = " ".join([i for i in article_dict['summary_as_list'] ]).split(' ')
 
-
-    summarize_by_length = summarize_by_sentence_number(sentence_value, int(numSentences))
-    article_dict['summary_as_list'] = summarize_by_length
-    flatten_summed_as_list = " ".join([i for i in article_dict['summary_as_list'] ]).split(' ')
-
-    orig_length_optarg, summary_length_optarg, pct_change_optarg = percent_change(sentences, flatten_summed_as_list)
-    
-    article_dict ['summary_list_length'] = summary_length_optarg
-    article_dict['pct_change_list'] = pct_change_optarg
-    ###########################  this part CAN BREAK script #######################
+        orig_length_optarg, summary_length_optarg, pct_change_optarg = percent_change(sentences, flatten_summed_as_list)
         
+        article_dict ['summary_list_length'] = summary_length_optarg
+        article_dict['pct_change_list'] = pct_change_optarg
+    ###########################  this part CAN BREAK script #######################
     #return article_dict
     #return jsonify(result=summary)
     return jsonify(article_dict)

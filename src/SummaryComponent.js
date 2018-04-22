@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import './PythonComponent.css';
-import PythonComponent2 from './PythonComponent2'
+import { Link, Route, Switch } from 'react-router-dom';
+import App from './App'
 
 
 
 
-class PythonComponent extends Component {
+class SummaryComponent extends Component {
 
-  constructor(props) {
+   constructor(props) {
     super(props);
     this.state = {
       showOrig: false,
@@ -25,11 +24,9 @@ class PythonComponent extends Component {
       clicked:!this.state.clicked});
   }
 
-  ShowDiv ()  {
-    return (
-      <div> stuff </div>
-      )
-  }
+
+
+
 
 
   render() {
@@ -38,11 +35,8 @@ class PythonComponent extends Component {
 
 
     return (
-
-
-
-
-            <div className="App" >
+      <div>
+  <div className="App" >
             <Link to={{pathname:"/"}}> home </Link>
             <button onClick={this.handleClick}> {text} </button>
 
@@ -66,17 +60,36 @@ class PythonComponent extends Component {
            {!this.state.clicked ?
             <div className="summary-box-orig"> 
               <h1 className="article-title-orig"> {this.props.location.summaryObject.title} </h1>
-                <p id="summary-text"> <span className="col-titles"> Original Text <br /> </span> {this.props.location.summaryObject.orig_text} </p> 
+                <p id="summary-text"> <span className="col-titles"> Original Text <br /> </span>
+                {this.props.location.summaryObject.orig_text.map(function(d, idx) {
+                  return (
+                    <ul>
+                      <li key={idx}>{idx} {d}</li>
+                    </ul>
+                    )
+                })}  
+
+                </p> 
 
            </div> : null }
 
 
-        </div>
+        
 
 
+
+
+
+
+    <Switch>
+      <Route exact path="/" component={App}/>
+    </Switch>
+
+      </div>
+      </div>
 
     );
   }
 }
 
-export default PythonComponent;
+export default SummaryComponent;
