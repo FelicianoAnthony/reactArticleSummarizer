@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link, Route, Switch } from 'react-router-dom';
 import App from './App'
+import './SummaryComponent.css'
 
 
 
@@ -54,7 +55,7 @@ class SummaryComponent extends Component {
                 {this.props.location.state.pythonJson.summary_as_list.map(function(d, idx) {
                   return (
                     <ul>
-                      <li key={idx}>{idx} {d}</li>
+                      <li key={idx} >{idx} {d}</li>
                     </ul>
                     )
                 })}   
@@ -62,7 +63,7 @@ class SummaryComponent extends Component {
 
               <div>
               <p> Original text - {this.props.location.state.pythonJson.orig_len} words </p>
-              <p> Summary - {this.props.location.state.pythonJson.summary_string_length} words </p>
+              <p> Summary - {this.props.location.state.pythonJson.summary_list_length} words </p>
               <p> Percent Change - {this.props.location.state.pythonJson.pct_change_list} % </p>
 
               </div>

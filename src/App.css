@@ -1,4 +1,8 @@
-.App {
+@import url(https://fonts.googleapis.com/css?family=Black+Han+Sans);
+
+body {
   text-align: center;
   background-color: #ffa500;
+  font-family: 'Black Han Sans';
+
 }

@@ -69,17 +69,20 @@ class Home extends Component {
 
 
   render() {
+
+
     return (
       <div className='outer'>
 
         <form id="form_login">
-          <p> Paste a url </p>
+          <h1> Paste a url </h1>
 {/*           {this.state.sentenceCount} */}
             <p>
               <input value={this.state.urlToSummarize} onChange={this.updateUrlToSummarize} className= "mytext" type="text" id="server" placeholder="url" />
-            </p> Summarize in 
+            </p>
+             <h1> Summarize in </h1>
                 <input value={this.state.sentenceCount} onChange={this.handleOnChange} className="sentences" id="sentence-box" type="text" placeholder="10" />
-              sentences
+              <h1> sentences </h1>
             <p> 
                 <button onClick={this.handleClick} id="submitbutton" type="button">Summarize</button>
             </p>

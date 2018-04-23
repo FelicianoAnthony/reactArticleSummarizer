@@ -1,17 +1,25 @@
 @import url(https://fonts.googleapis.com/css?family=Black+Han+Sans);
 
-body, html {
-    width: 100%;
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    display:table;
-    font-family:'Black Han Sans';
+
+.outer {
+  display: flex;
+  text-align:center;
+  justify-content: center; /* center horizontally */
+  font-family:"Black Han Sans";
 }
-body {
-    display:table-cell;
-    vertical-align:middle;
-}
+
+/*.outer
+{
+  position: absolute;
+  margin: auto;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100px;
+  height: 100px;
+}*/
+
 
 .mytext {
     width: 300px;
@@ -20,6 +28,8 @@ body {
 .sentences {
 	width:20px;
 }
+
+
 
 
 
