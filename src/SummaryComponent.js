@@ -37,15 +37,18 @@ class SummaryComponent extends Component {
     return (
       <div>
   <div className="App" >
-            <Link to={{pathname:"/"}}> home </Link>
-            <button onClick={this.handleClick}> {text} </button>
-
+            
+            <ul>
+              <li><Link to={{pathname:"/"}}> Home </Link></li>
+            </ul>
    
             <div className="summary-box"> 
-              <h1 className="article-title"> {this.props.location.summaryObject.title} </h1>
+              <h1 className="article-title"> {this.props.location.state.pythonJson.title} </h1>
+
+
 
                 <p id="summary-text"> <span className="col-titles"> Summarized Text <br /> 
-                {this.props.location.summaryObject.summary_as_list.map(function(d, idx) {
+                {this.props.location.state.pythonJson.summary_as_list.map(function(d, idx) {
                   return (
                     <ul>
                       <li key={idx}>{idx} {d}</li>
@@ -54,14 +57,14 @@ class SummaryComponent extends Component {
                 })}   
                 </span>  </p> 
 
-
+              <li><button onClick={this.handleClick}> {text} </button></li>
            </div>  
 
            {!this.state.clicked ?
             <div className="summary-box-orig"> 
-              <h1 className="article-title-orig"> {this.props.location.summaryObject.title} </h1>
+              <h1 className="article-title-orig"> {this.props.location.state.pythonJson.title} </h1>
                 <p id="summary-text"> <span className="col-titles"> Original Text <br /> </span>
-                {this.props.location.summaryObject.orig_text.map(function(d, idx) {
+                {this.props.location.state.pythonJson.orig_text.map(function(d, idx) {
                   return (
                     <ul>
                       <li key={idx}>{idx} {d}</li>

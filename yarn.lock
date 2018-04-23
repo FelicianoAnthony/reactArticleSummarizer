@@ -5887,7 +5887,7 @@ request@2.81.0:
     tunnel-agent "^0.6.0"
     uuid "^3.0.0"
 
-request@^2.79.0:
+request@^2.69.0, request@^2.79.0:
   version "2.85.0"
   resolved "https://registry.yarnpkg.com/request/-/request-2.85.0.tgz#5a03615a47c61420b3eb99b7dba204f83603e1fa"
   dependencies:
@@ -6856,6 +6856,12 @@ urijs@^1.16.1:
 urix@^0.1.0:
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/urix/-/urix-0.1.0.tgz#da937f7a62e21fec1fd18d49b35c2935067a6c72"
+
+url-exists@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/url-exists/-/url-exists-1.0.3.tgz#05b2875baf04950e27ef51e9846f1eff04716893"
+  dependencies:
+    request "^2.69.0"
 
 url-loader@0.6.2:
   version "0.6.2"
