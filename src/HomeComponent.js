@@ -70,11 +70,11 @@ class Home extends Component {
 
   render() {
     return (
-      <div>
+      <div className='outer'>
 
         <form id="form_login">
           <p> Paste a url </p>
-          {this.state.sentenceCount}
+{/*           {this.state.sentenceCount} */}
             <p>
               <input value={this.state.urlToSummarize} onChange={this.updateUrlToSummarize} className= "mytext" type="text" id="server" placeholder="url" />
             </p> Summarize in 
