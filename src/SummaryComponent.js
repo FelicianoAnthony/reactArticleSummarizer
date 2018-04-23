@@ -52,7 +52,7 @@ class SummaryComponent extends Component {
                 {this.props.location.state.pythonJson.summary_as_list.map(function(d, idx) {
                   return (
                     <ul>
-                      <li key={idx} >{idx} {d}</li>
+                      <li key={idx} >{idx+1} {d}</li>
                     </ul>
                     )
                 })}   

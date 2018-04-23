@@ -48,6 +48,60 @@ def percent_change(original_text, summary_text):
     
     return orig_text_len, summary_text_len, pct_decrease
 
+def clean_article_text(soup):
+
+    # scrape article text & remove image descriptions 
+    article_text = []
+    for p in soup.find_all('p'):
+        txt = p.text
+        if '|' in txt :
+            idx = txt.index('|')
+            article_text.append(txt[:idx])
+        else:
+            article_text.append(txt)
+
+    # create list of # of words in each sentence
+    sent_length = []
+    for i in article_text:
+        sentence_split = i.split(' ')
+        sent_length.append(len(sentence_split))
+       # print("sentence length= {}\n\nsentence= {}\n\n".format(len(sentence_split), sentence_split))
+
+    # sort sentence length & take midpoint 
+    sent_length_sorted = sorted(sent_length)
+    cutoff2 = round((len(sent_length_sorted) - 1)/2)
+
+    for i in sent_length_sorted:
+        if i > cutoff2:
+            cutoff2 +=i
+            break
+
+
+    clean_article_text = []
+    for i in article_text:
+        if len(i) > cutoff2 * 3: ### change this number to alter 
+            clean_article_text.append(i)
+           #print(i, len(i), '\n\n')
+
+    return clean_article_text
+
+    
+    #[i.text for i in soup.find_all('blockquote')]
+
+    # article_text = []
+    # for i in soup.find_all('body'):
+    #     p_tags = i.find_all('p')
+    #     for p in p_tags:
+    #         top_level_p = p.find(text=True, recursive=False)
+    #         if top_level_p == None:
+    #             pass
+    #         elif '|' in top_level_p:
+    #             idx = top_level_p.index('|')
+    #             article_text.append(top_level_p[:idx])
+    #         else:
+    #             article_text.append(top_level_p)
+    # return article_text[:-4]
+
 
 @app.route('/hello/', methods=['GET', 'POST'])
 def summarize_article(name=None, name1=None):
@@ -65,9 +119,22 @@ def summarize_article(name=None, name1=None):
     r = requests.get(url, headers={"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.94 Safari/537.36"})
     soup = BeautifulSoup(r.content, "html5lib")
 
-    # get article title & text
-    article_text = [i.text for i in soup.find_all('p')]
-    article_title = [i.text.strip() for i in soup.find_all('h1')][0]
+    # get article text
+    article_text = clean_article_text(soup)
+
+    article_title = []
+    for i in soup.find_all('h1'):
+        sp = i.text.strip()
+        article_title.append(sp)
+    
+    
+    # if domain name in h1 also  -- article title is prob longer list item
+    for x in range(len(article_title)):
+        print(article_title[x])
+        if len(article_title[x]) < 10:
+            pass
+        else:
+            article_title = article_title[x]
 
 
     text = " ".join(article_text)
