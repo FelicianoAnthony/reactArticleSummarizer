@@ -48,17 +48,20 @@ class SummaryComponent extends Component {
 
               <h1 className="article-title"> {this.props.location.state.pythonJson.title} </h1>
 
-                <p id="summary-text"> <span className="col-titles"> Summarized Text <br /> 
+                <p id="summary-text"> <span className="col-titles"> 
+                  Article Summarized in {this.props.location.state.sentenceCount} sentences
+                 <br /> 
                 {this.props.location.state.pythonJson.summary_as_list.map(function(d, idx) {
                   return (
                     <ul>
-                      <li key={idx} >{idx+1} {d}</li>
+                      <li key={idx} >{idx+1} <br/> {d} </li>
                     </ul>
                     )
                 })}   
                 </span>  </p> 
 
               <div className="summary-stats">
+                <h1> Summary Statistics </h1>
                 <p> Original text - {this.props.location.state.pythonJson.orig_len} words </p>
                 <p> Summary - {this.props.location.state.pythonJson.summary_list_length} words </p>
                 <p> Percent Change - {this.props.location.state.pythonJson.pct_change_list} % </p>
@@ -74,7 +77,7 @@ class SummaryComponent extends Component {
                 {this.props.location.state.pythonJson.orig_text.map(function(d, idx) {
                   return (
                     <ul>
-                      <li key={idx}>{idx} {d}</li>
+                      <li key={idx}>{idx+1} <br /> {d}</li>
                     </ul>
                     )
                 })}  
