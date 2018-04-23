@@ -23,6 +23,7 @@ class Home extends Component {
     };
   }
 
+
   handleClick = () => {
     console.log(this.state.sentenceCount, 'from inside handleClick')
 
@@ -62,7 +63,8 @@ class Home extends Component {
     console.log(e.target.value)
   }
 
-  handleOnChange = ( e ) => {
+
+  updateSentenceCount = ( e ) => {
     e.preventDefault()
     this.setState({sentenceCount: e.target.value})
   }
@@ -74,6 +76,7 @@ class Home extends Component {
     return (
       <div className='outer'>
 
+
         <form id="form_login">
           <h1> Paste a url </h1>
 {/*           {this.state.sentenceCount} */}
@@ -81,18 +84,13 @@ class Home extends Component {
               <input value={this.state.urlToSummarize} onChange={this.updateUrlToSummarize} className= "mytext" type="text" id="server" placeholder="url" />
             </p>
              <h1> Summarize in </h1>
-                <input value={this.state.sentenceCount} onChange={this.handleOnChange} className="sentences" id="sentence-box" type="text" placeholder="10" />
+                <input value={this.state.sentenceCount} onChange={this.updateSentenceCount} className="sentences" id="sentence-box" type="text" placeholder="10" />
               <h1> sentences </h1>
             <p> 
                 <button onClick={this.handleClick} id="submitbutton" type="button">Summarize</button>
             </p>
-              {(() => {
-              if (this.state.renderComp) {
-                  return <SummaryComponent test={this.state.gets}/>
-              }
-              })()}
-        
         </form>
+
 
       </div>
 

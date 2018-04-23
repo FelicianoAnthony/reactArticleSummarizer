@@ -36,20 +36,17 @@ class SummaryComponent extends Component {
 
 
     return (
-      <div>
-  <div className="App" >
-            
+
+
+          <div className="App" >
+                    
             <ul>
               <li><Link to={{pathname:"/"}}> Home </Link></li>
             </ul>
-   
+
             <div className="summary-box"> 
+
               <h1 className="article-title"> {this.props.location.state.pythonJson.title} </h1>
-
-
-
-
-
 
                 <p id="summary-text"> <span className="col-titles"> Summarized Text <br /> 
                 {this.props.location.state.pythonJson.summary_as_list.map(function(d, idx) {
@@ -61,11 +58,10 @@ class SummaryComponent extends Component {
                 })}   
                 </span>  </p> 
 
-              <div>
-              <p> Original text - {this.props.location.state.pythonJson.orig_len} words </p>
-              <p> Summary - {this.props.location.state.pythonJson.summary_list_length} words </p>
-              <p> Percent Change - {this.props.location.state.pythonJson.pct_change_list} % </p>
-
+              <div className="summary-stats">
+                <p> Original text - {this.props.location.state.pythonJson.orig_len} words </p>
+                <p> Summary - {this.props.location.state.pythonJson.summary_list_length} words </p>
+                <p> Percent Change - {this.props.location.state.pythonJson.pct_change_list} % </p>
               </div>
 
               <li><button onClick={this.handleClick}> {text} </button></li>
@@ -88,19 +84,12 @@ class SummaryComponent extends Component {
            </div> : null }
 
 
-        
 
+            <Switch>
+              <Route exact path="/" component={App}/>
+            </Switch>
 
-
-
-
-
-    <Switch>
-      <Route exact path="/" component={App}/>
-    </Switch>
-
-      </div>
-      </div>
+          </div>
 
     );
   }
