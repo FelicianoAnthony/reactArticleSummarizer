@@ -121,7 +121,7 @@ def summarize_article(name=None, name1=None):
     
             
     article_dict['title'] = article_title
-    article_dict['summary_text_string'] = summary # formerly text
+    article_dict['summary_text_string'] = summary[:-1] # formerly text
     article_dict['summary_string_length'] = summary_length
     article_dict['orig_text'] = article_text
     article_dict['orig_len'] = orig_length
