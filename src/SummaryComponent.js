@@ -47,6 +47,9 @@ class SummaryComponent extends Component {
 
 
 
+
+
+
                 <p id="summary-text"> <span className="col-titles"> Summarized Text <br /> 
                 {this.props.location.state.pythonJson.summary_as_list.map(function(d, idx) {
                   return (
@@ -56,6 +59,13 @@ class SummaryComponent extends Component {
                     )
                 })}   
                 </span>  </p> 
+
+              <div>
+              <p> Original text - {this.props.location.state.pythonJson.orig_len} words </p>
+              <p> Summary - {this.props.location.state.pythonJson.summary_string_length} words </p>
+              <p> Percent Change - {this.props.location.state.pythonJson.pct_change_list} % </p>
+
+              </div>
 
               <li><button onClick={this.handleClick}> {text} </button></li>
            </div>  
