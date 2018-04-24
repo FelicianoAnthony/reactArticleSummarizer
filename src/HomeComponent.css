@@ -1,0 +1,35 @@
+@import url(https://fonts.googleapis.com/css?family=Black+Han+Sans);
+
+
+.outer {
+  display: flex;
+  text-align:center;
+  justify-content: center; /* center horizontally */
+  font-family:"Black Han Sans";
+}
+
+/*.outer
+{
+  position: absolute;
+  margin: auto;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100px;
+  height: 100px;
+}*/
+
+
+.mytext {
+    width: 300px;
+}
+
+.sentences {
+	width:20px;
+}
+
+
+
+
+
