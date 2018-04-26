@@ -2,7 +2,7 @@
 
 `pip3 install -r req.txt`
 
-[comment]: <> (installs beautifulsoup4 flask nltk requests)
+<!-- installs beautifulsoup4 flask nltk requests -->
 
 `cd src`
 
