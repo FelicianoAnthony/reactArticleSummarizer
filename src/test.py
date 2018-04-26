@@ -118,7 +118,7 @@ def summarize_article(name=None, name1=None):
     
     user_agent = request.headers.get('User-Agent')
     r = requests.get(url, headers={"User-Agent": user_agent})
-    soup = BeautifulSoup(r.content, "html5lib")
+    soup = BeautifulSoup(r.content, "lxml")
 
     # get article text
     article_text = clean_article_text(soup)
@@ -224,5 +224,5 @@ def getTitle():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=5000, debug=True)
 
