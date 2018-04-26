@@ -1,6 +1,8 @@
 # Article Summarizer with React & Python
 
-`pip3 install beautifulsoup4 flask nltk requests lxml`
+`pip3 install -r req.txt`
+
+[comment]: <> (installs beautifulsoup4 flask nltk requests)
 
 `cd src`
 
