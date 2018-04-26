@@ -36,13 +36,27 @@ class Home extends Component {
     } 
 
     else{
+      console.log('right before ajax')
       $.ajax({
       type: "GET",
+      //headers: {  'Access-Control-Allow-Origin': 'http://localhost:5000/hello/' },
+      //headers: {  'Access-Control-Allow-Origin': 'http://localhost:5000/hello/' },
+      //dataType: "jsonp",
+      //jsonp: 'callback',
+      //jsonpCallback: 'successMsg',
+      //crossDomain:true,
       data: { arg1: this.state.urlToSummarize, arg2:parseInt(this.state.sentenceCount)},
-      url: "http://127.0.0.1:5000/hello/",
+      // change this to the EC2 IP & make sure Custom TCP  @ 5000 in inbound rules
+      url: "http://52.206.133.234:5000/hello/",
+      success: function (data, text) {
+        console.log('SUCCESS\n', 'DATA --> ', data, 'TEXT --> ', text)
+      },
+      error: function (request, status, error) {
+        console.log('REQUEST- RESPONSETEXT\n',request.responseText, '\nrequest\n', request, '\nstatus\n', status, '\nerror\n', error);
+      }
       })
       .then( (result) => {
-        console.log(result)
+        //console.log(result)
         this.props.history.push({
           pathname: '/summary',
           // search: '='  + this.state.urlToSummarize,
