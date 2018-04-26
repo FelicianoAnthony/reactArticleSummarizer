@@ -116,7 +116,8 @@ def summarize_article(name=None, name1=None):
     # will eventually hold object return from this function
     article_dict = {}
     
-    r = requests.get(url, headers={"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.94 Safari/537.36"})
+    user_agent = request.headers.get('User-Agent')
+    r = requests.get(url, headers={"User-Agent": user_agent})
     soup = BeautifulSoup(r.content, "html5lib")
 
     # get article text
