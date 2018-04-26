@@ -47,7 +47,7 @@ class Home extends Component {
       //crossDomain:true,
       data: { arg1: this.state.urlToSummarize, arg2:parseInt(this.state.sentenceCount)},
       // change this to the EC2 IP & make sure Custom TCP  @ 5000 in inbound rules
-      url: "http://54.159.129.186:5000/hello/",
+      url: "http://52.206.133.234:5000/hello/",
       success: function (data, text) {
         console.log('SUCCESS\n', 'DATA --> ', data, 'TEXT --> ', text)
       },
