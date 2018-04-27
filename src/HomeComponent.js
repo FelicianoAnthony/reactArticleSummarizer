@@ -3,6 +3,7 @@ import './HomeComponent.css'
 import SummaryComponent from './SummaryComponent'
 import {withRouter} from "react-router-dom";
 
+import FooterComponent from './FooterComponent'
 
 import { Link } from 'react-router-dom';
 import './App.css';
@@ -47,7 +48,7 @@ class Home extends Component {
       //crossDomain:true,
       data: { arg1: this.state.urlToSummarize, arg2:parseInt(this.state.sentenceCount)},
       // change this to the EC2 IP & make sure Custom TCP  @ 5000 in inbound rules
-      url: "http://52.206.133.234:5000/hello/",
+      url: "http://127.0.0.1:5000/hello/",
       success: function (data, text) {
         console.log('SUCCESS\n', 'DATA --> ', data, 'TEXT --> ', text)
       },
@@ -88,7 +89,7 @@ class Home extends Component {
 
 
     return (
-      <div className='outer'>
+      <div className='centered'>
 
 
         <form id="form_login">
@@ -101,12 +102,18 @@ class Home extends Component {
                 <input value={this.state.sentenceCount} onChange={this.updateSentenceCount} className="sentences" id="sentence-box" type="text" placeholder="10" />
               <h1> sentences </h1>
             <p> 
-                <button onClick={this.handleClick} id="submitbutton" type="button">Summarize</button>
+                <button onClick={this.handleClick} className="btn-push blue" id="submitbutton" type="button">Summarize</button>
             </p>
         </form>
 
 
+
+
       </div>
+
+
+
+
 
     );
   }
