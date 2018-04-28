@@ -41,16 +41,13 @@ class SummaryComponent extends Component {
           <div className="App" >
                     
             <ul>
-              <li><Link to={{pathname:"/"}}> Home </Link></li>
-              <li><Link to={{pathname:"/about"}}> About  </Link> </li>
-
+              <li className="home-link"><Link to={{pathname:"/"}}> Home </Link></li>
+              <li className="about-link"><Link to={{pathname:"/about"}}> About  </Link> </li>
             </ul>
 
             <div className="summary-box"> 
-
               <h1 className="summary-page-titles"> {this.props.location.state.pythonJson.title} </h1>
-
-                <p className="summary-text"> ( Article Summarized in {this.props.location.state.sentenceCount} sentences ) </p>
+                <p className="summary-subheading"> ( Article Summarized in {this.props.location.state.sentenceCount} sentences ) </p>
                  <br /> 
 
                 <div> 
@@ -70,18 +67,18 @@ class SummaryComponent extends Component {
                 <p className = "summary-stats-text"> Original text - {this.props.location.state.pythonJson.orig_len} words </p>
                 <p className = "summary-stats-text"> Summary - {this.props.location.state.pythonJson.summary_list_length} words </p>
                 <p className = "summary-stats-text">  Percent Change - {this.props.location.state.pythonJson.pct_change_list} % </p>
+                <button className="btn-push blue" type="button"onClick={this.handleClick}> {text} </button>
               </div>
 
+             
 
-              
 
-              <button className="btn-push blue" type="button"onClick={this.handleClick}> {text} </button>
            </div>  
 
            {!this.state.clicked ?
             <div className="summary-box-orig"> 
               <h1 className="article-title-orig"> {this.props.location.state.pythonJson.title} </h1>
-                <p id="summary-text"> <span className="col-titles"> Original Text <br /> </span>
+                <p className="summary-subheading"> <span className="col-titles"> Original Text <br /> </span>
                 {this.props.location.state.pythonJson.orig_text.map(function(d, idx) {
                   return (
                     <ul>

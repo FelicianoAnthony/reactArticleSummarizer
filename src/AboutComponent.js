@@ -33,7 +33,7 @@ class AboutComponent extends Component {
         </ul>
 
         <div class="icon-bar">
-          <h1 className="footer-tech"> Technologies Used </h1>
+          <h1 className="footer-tech"> Software Used </h1>
           <a href="https://github.com/" target="_blank" rel='noopener noreferrer'> <img alt="" src={githubLogo}/> </a> 
           <a href="https://www.python.org/" target="_blank" rel='noopener noreferrer'> <img alt="Python Logo " src={pythonLogo} /> </a>
           <a href="https://reactjs.org/" target="_blank" rel='noopener noreferrer'>    <img alt="React JS Logo" src={react_logo}/> </a>

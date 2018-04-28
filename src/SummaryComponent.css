@@ -69,19 +69,31 @@
 ul {
 text-align:center;
 list-style-type: none;
-color:#99b8ff;
+color:#998E81;
+font-family: "Montserrat";
+padding-left: 120px;
+padding-right:120px;
+
 
 }
 
 
 
 .summary-stats-text {
-	 color: #ffcb1e
+	 color: #ffcb1e;
+   font-family: "Montserrat";
+
 }
 
 p.summary-stats-text {
-	color:#99b8ff
+	color:#998E81
 }
+
+p.summary-subheading {
+  color: #A15F47;
+  font-family: "Montserrat";
+}
+
 
 
 

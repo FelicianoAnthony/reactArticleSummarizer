@@ -18,78 +18,86 @@ class Home extends Component {
     super(props);
     this.state = {
       pythonJson:[],
-      urlToSummarize: '',
+      urlSummary: '',
       sentenceCount: 7,
-      boxToSummarize:[]
+      boxSummary:[]
     };
+  }
+
+  ajaxSuccess =  (data, text) =>  {
+    console.log('SUCCESS\n', 'DATA --> ', data, 'TEXT --> ', text)
+  }
+
+  ajaxError =  (request, status, error) => {
+        console.log('REQUEST- RESPONSETEXT\n',request.responseText, '\nrequest\n', request, '\nstatus\n', status, '\nerror\n', error);
   }
 
 
   handleClick = () => {
-    console.log(this.state.boxText, 'inside handleClick')
+
+    // since state wont change until it's used -- assign states to variables 
+    let sentenceCount = this.state.sentenceCount;
+    let boxSummary = this.state.boxSummary;
+    let urlSummary = this.state.urlSummary;
 
 
-
-    if (!this.state.sentenceCount) {
+    // handle for incorrect & correct input
+    if (!sentenceCount) {
       alert('Enter sentence number')
     }
 
-    else if (this.state.boxToSummarize.length >= 1 && this.state.urlToSummarize.length >=1) {
+    else if (boxSummary.length >= 1 && urlSummary.length >=1) {
       alert('Can\'t summarize two things at the same time')
     }
 
-    else if (this.state.boxToSummarize.length === 0 && this.state.urlToSummarize.length == 0) {
-      alert('Nothing to summarize.')
+    else if (boxSummary.length === 0 && urlSummary.length === 0) {
+      alert('Nothing to summarize')
     }
 
     // logic for summarizing text box
-    else if (this.state.boxToSummarize.length > 1 && this.state.urlToSummarize.length === 0) {
-      console.log('inside ajax')
-      $.ajax({
-        type:"GET",
-        data: { textBoxString: this.state.boxToSummarize, arg2:parseInt(this.state.sentenceCount)},
-        url: "http://127.0.0.1:5000/summarize_text/",
-        success: function (data, text) {
-          console.log('SUCCESS\n', 'DATA --> ', data, 'TEXT --> ', text)
-        },
-        error: function (request, status, error) {
-          console.log('REQUEST- RESPONSETEXT\n',request.responseText, '\nrequest\n', request, '\nstatus\n', status, '\nerror\n', error);
-        }
-        }).then( (sumResult) => {
-          console.log(sumResult)
-        this.props.history.push({
-          pathname: '/summary',
-          state: {
-            pythonJson: sumResult,
-            sentenceCount: this.state.sentenceCount
-          }
+    else if (boxSummary.length >= 1 && urlSummary.length === 0) {
+      if (boxSummary.length < 50) {
+          alert('Text is too short to summarize')
+      }
+      else {
+        console.log('Summarizing from textbox...\n\n')
+        $.ajax({
+          type:"GET",
+          data: { textBoxString: boxSummary, sentenceCountStr:sentenceCount},
+          url: "http://127.0.0.1:5000/summarize_text/",
+          success: this.ajaxSuccess,
+          error: this.ajaxError
+          })
+          .then( (summaryBoxObj) => {
+            this.props.history.push({
+              pathname: '/summary',
+              state: {
+              pythonJson: summaryBoxObj,
+              sentenceCount: sentenceCount
+            }
+          })
         })
-      })
+      }
     }
 
     // logic for summarizing url 
-    else if( this.state.urlToSummarize.startsWith('http') && this.state.boxToSummarize.length === 0) {
-      console.log('right before ajax')
+    else if( urlSummary.startsWith('http') && boxSummary.length === 0) {
+      console.log('Summarizing from url...\n\n')
       $.ajax({
       type: "GET",
-      data: { arg1: this.state.urlToSummarize, arg2:parseInt(this.state.sentenceCount)},
+      data: { urlString: urlSummary, sentenceCountStr:sentenceCount},
       // change this to the EC2 IP & make sure Custom TCP  @ 5000 in inbound rules
       url: "http://127.0.0.1:5000/summarize_url/",
-      success: function (data, text) {
-        console.log('SUCCESS\n', 'DATA --> ', data, 'TEXT --> ', text)
-      },
-      error: function (request, status, error) {
-        console.log('REQUEST- RESPONSETEXT\n',request.responseText, '\nrequest\n', request, '\nstatus\n', status, '\nerror\n', error);
-      }
+      success: this.ajaxSuccess,
+      error: this.ajaxError
       })
-      .then( (result) => {
-        //console.log(result)
+      .then( (summaryUrlObj) => {
         this.props.history.push({
           pathname: '/summary',
-          // search: '='  + this.state.urlToSummarize,
+           // search: '='  + urlSummary,
           state: {
-            pythonJson: result, 
-            sentenceCount: this.state.sentenceCount
+          pythonJson: summaryUrlObj, 
+          sentenceCount: sentenceCount
           }
         })
       })
@@ -98,19 +106,18 @@ class Home extends Component {
 
 
 
-  updateUrlToSummarize = (e) => {
-    this.setState({urlToSummarize: e.target.value})
+  updateUrlSummary = ( e ) => {
+    this.setState({urlSummary: e.target.value})
     console.log(e.target.value)
   }
 
 
   updateSentenceCount = ( e ) => {
-    e.preventDefault()
     this.setState({sentenceCount: e.target.value})
   }
 
   updateBoxText = ( e ) => {
-    this.setState({boxToSummarize:e.target.value})
+    this.setState({boxSummary:e.target.value})
   }
 
 
@@ -123,12 +130,11 @@ class Home extends Component {
 
         <form id="form_login">
           <h1> Paste a url </h1>
-{/*           {this.state.sentenceCount} */}
             <p>
-              <input value={this.state.urlToSummarize} onChange={this.updateUrlToSummarize} className= "mytext" type="text" id="server" placeholder="url" />
+              <input value={this.state.urlSummary} onChange={this.updateUrlSummary} className= "mytext" type="text" id="server" placeholder="url" />
             </p>
-            <h1>  Or paste some text </h1>
-            <textarea value={this.state.boxToSummarize} onChange={this.updateBoxText} type="text"> 
+            <h1>  Or some text </h1>
+            <textarea value={this.state.boxSummary} onChange={this.updateBoxText} type="text"> 
             </textarea>
              <h1> Summarize in </h1>
                 <input value={this.state.sentenceCount} onChange={this.updateSentenceCount} className="sentences" id="sentence-box" type="text" placeholder="7" />

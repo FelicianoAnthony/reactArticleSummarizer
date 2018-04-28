@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request, redirect, Response, jsonify
+from string import ascii_lowercase
 from bs4 import BeautifulSoup
 import requests
 import json
@@ -157,18 +158,28 @@ def summarize_textbox():
     summary_list = summary.split(' ')
     orig_length, summary_length, pct_change = percent_change(sentences, summary_list)
     
-            
-    article_dict['title'] = "Your summary"  ## need to change this!!!
+    
+    # get most frequent word
+    sorted_by_score = list(reversed(sorted(freq_table.items(), key=operator.itemgetter(1))))
+    lower_letters_tuple = tuple(list(ascii_lowercase))
+    mostFreqWord = []
+    for i in sorted_by_score:
+        for letters in i[0]:
+            lower_letters = letters
+            if lower_letters.startswith((lower_letters_tuple)):
+                mostFreqWord.append(i[0])
+
+    article_dict['title'] = 'Most Frequent Word: ' + mostFreqWord[0][0].upper() + mostFreqWord[0][1:]   ## need to change this!!!
     article_dict['summary_text_string'] = summary[:-1]
     article_dict['summary_string_length'] = summary_length
-    article_dict['orig_text'] = str(text)
+    article_dict['orig_text'] = sentences
     article_dict['orig_len'] = orig_length
     article_dict['percent_change_string'] = pct_change
 
     
     # check for optional argument 
     try:
-        numSentences = request.args.get('arg2', type=int)
+        numSentences = request.args.get('sentenceCountStr', type=int)
     except Exception as e:
         print(str(e))
     ###########################  this part will break the script #######################
@@ -195,7 +206,7 @@ def summarize_textbox():
 @app.route('/summarize_url/', methods=['GET', 'POST'])
 def summarize_article(name=None, name1=None):
 
-    url = request.args.get('arg1')
+    url = request.args.get('urlString')
     # try:
     #     numSentences = request.args.get('arg2')
     # except Exception as e:
@@ -276,7 +287,10 @@ def summarize_article(name=None, name1=None):
     summary_list = summary.split(' ')
     orig_length, summary_length, pct_change = percent_change(sentences, summary_list)
     
-            
+    
+    
+
+
     article_dict['title'] = article_title
     article_dict['summary_text_string'] = summary[:-1] # formerly text
     article_dict['summary_string_length'] = summary_length
@@ -287,7 +301,7 @@ def summarize_article(name=None, name1=None):
     
     # check for optional argument 
     try:
-        numSentences = request.args.get('arg2', type=int)
+        numSentences = request.args.get('sentenceCountStr', type=int)
     except Exception as e:
         print(str(e))
     ###########################  this part will break the script #######################
