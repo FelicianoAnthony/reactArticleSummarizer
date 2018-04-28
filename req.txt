@@ -3,3 +3,4 @@ flask
 nltk 
 requests 
 lxml
+pyOpenSSL

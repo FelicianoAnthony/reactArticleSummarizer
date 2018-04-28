@@ -2,6 +2,10 @@
 @import url(https://fonts.googleapis.com/css?family=Ubuntu);
 @import  url(https://fonts.googleapis.com/css?family=Montserrat);
 
+
+overflow: scroll;
+-webkit-overflow-scrolling: touch;
+
 /*==========  Structure  ==========*/
 .btn-push {
   position: relative;
@@ -9,7 +13,7 @@
   font-family: "Montserrat";
   text-decoration: none;
   font-size: 25px;
-  background: #f7f7f7;
+  background: #99b8ff;
   padding: 15px 50px;
   margin: 0 10px;
   border: 1px solid #c4c4c4;
@@ -47,8 +51,8 @@
 
 
 .btn-push.blue {
-  background: #1ef4ff;
-  color: #fff;
+  background: #A15F47;
+  color: #A15F47;
   border: 1px solid #177c8e;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
@@ -73,16 +77,17 @@
 }
 
 .mytext {
-    width: 300px;
+    width: 450px;
 }
 
 .sentences {
   width:20px;
+  height: 10;
 }
 
 
 h1 {
-  color: white
+  color: #A15F47
 }
 
 /* why does this control footerComponent.css */
@@ -91,6 +96,11 @@ h1 {
 img {
   width: 100px;
   height:100px;
+}
+
+textarea {
+  width: 450px;
+  height: 300px;
 }
 
 
