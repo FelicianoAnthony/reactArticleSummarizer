@@ -64,7 +64,7 @@ class Home extends Component {
         $.ajax({
           type:"GET",
           data: { textBoxString: boxSummary, sentenceCountStr:sentenceCount},
-          url: "http://127.0.0.1:5000/summarize_text/",
+          url: "http://184.72.180.74:5000/summarize_text/",
           success: this.ajaxSuccess,
           error: this.ajaxError
           })
@@ -87,7 +87,7 @@ class Home extends Component {
       type: "GET",
       data: { urlString: urlSummary, sentenceCountStr:sentenceCount},
       // change this to the EC2 IP & make sure Custom TCP  @ 5000 in inbound rules
-      url: "http://127.0.0.1:5000/summarize_url/",
+      url: "http://184.72.180.74:5000/summarize_url/",
       success: this.ajaxSuccess,
       error: this.ajaxError
       })
