@@ -17,8 +17,8 @@
 
 ### Main Window
 
-![alt text](screenshots/main_window.png)
+![alt text](screenshots/main_window1.png)
 
 ### Example Output
 
-![alt text](screenshots/output_window.png)
+![alt text](screenshots/output_window1.png)
