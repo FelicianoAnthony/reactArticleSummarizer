@@ -5631,6 +5631,10 @@ react-scripts@^1.1.4:
   optionalDependencies:
     fsevents "^1.1.3"
 
+react-vivus@0.0.2:
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/react-vivus/-/react-vivus-0.0.2.tgz#5afc7f0804c5b038a543a1f2358be9149f769ebb"
+
 react@^16.3.2:
   version "16.4.0"
   resolved "https://registry.yarnpkg.com/react/-/react-16.4.0.tgz#402c2db83335336fba1962c08b98c6272617d585"
@@ -6860,6 +6864,10 @@ verror@1.10.0:
     assert-plus "^1.0.0"
     core-util-is "1.0.2"
     extsprintf "^1.2.0"
+
+vivus@^0.4.3:
+  version "0.4.3"
+  resolved "https://registry.yarnpkg.com/vivus/-/vivus-0.4.3.tgz#d7cd1b8b9053756b21cdc5731f2308510c5f0557"
 
 vm-browserify@0.0.4:
   version "0.0.4"
