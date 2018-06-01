@@ -10,7 +10,9 @@
     "react-fontawesome": "^1.6.1",
     "react-router-dom": "^4.3.0-rc.3",
     "react-scripts": "^1.1.4",
-    "url-exists": "^1.0.3"
+    "react-vivus": "0.0.2",
+    "url-exists": "^1.0.3",
+    "vivus": "^0.4.3"
   },
   "scripts": {
     "start": "react-scripts start",

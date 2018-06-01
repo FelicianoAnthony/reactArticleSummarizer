@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import './HomeComponent.css'
 import SummaryComponent from './SummaryComponent'
 import {withRouter} from "react-router-dom";
+import Graph from './images/untitled.svg';
+import Vivus from 'vivus';
 
 
 import { Link } from 'react-router-dom';
@@ -13,6 +15,12 @@ import $ from 'jquery';
 
 
 class Home extends Component {
+
+      componentDidMount() {
+        // let vivus = Vivus('graph', {duration: 200, file: Graph}, {})
+        new Vivus('graph', {duration: 80, file: Graph}, null)
+    }
+
 
   constructor(props) {
     super(props);
@@ -127,7 +135,10 @@ class Home extends Component {
     return (
       <div className='centered'>
 
-
+<div>
+                <div id="graph"></div>
+            </div>
+            
         <form id="form_login">
           <h1> Paste a url </h1>
             <p>

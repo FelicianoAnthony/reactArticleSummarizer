@@ -8,7 +8,12 @@ body {
   text-align: center;
   /*background-color: #ffa500;*/
   /*background-color: #0093D1;*/
-  background-color: #1C1C1C;
+  /*background-color: #1C1C1C;*/
   font-family: 'Ubuntu';
 
+}
+
+#graph{
+	    max-height: 200px;
+    overflow: hidden;
 }
