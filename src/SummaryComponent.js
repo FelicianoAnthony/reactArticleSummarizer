@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link, Route, Switch } from 'react-router-dom';
 import App from './App'
-import './SummaryComponent.css'
+// import './SummaryComponent.css'
 import AboutComponent from './AboutComponent'
 
 

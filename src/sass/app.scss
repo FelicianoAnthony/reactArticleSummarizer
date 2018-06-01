@@ -1,0 +1,39 @@
+// Google Fonts
+@import url('https://fonts.googleapis.com/css?family=Nunito:400,600,900');
+
+// Font Variables
+$nunito: 'Nunito', Hevetica, Arial, sans-serif;
+$normal: 400;
+$semibold: 600;
+$bold: 900;
+
+body {
+  font-family: $nunito;
+}
+
+
+.wrap{
+	padding: 20px;
+}
+
+#summry_logo{
+ max-width: 200px;
+ margin: 0 auto;
+ display: block;
+ padding: 20px;
+}
+
+
+#summry_logo svg{
+	    max-width: 200px;
+}
+
+.intro{
+	text-align: center;
+	font-weight: $semibold;
+}
+
+#form input, textarea{
+width: 100%;
+height: 40px;
+}

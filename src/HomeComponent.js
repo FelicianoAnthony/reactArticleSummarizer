@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
-import './HomeComponent.css'
+// import './HomeComponent.css'
 import SummaryComponent from './SummaryComponent'
 import {withRouter} from "react-router-dom";
-import Graph from './images/untitled.svg';
+import Graph from './images/summry_logo.svg';
 import Vivus from 'vivus';
 
 
 import { Link } from 'react-router-dom';
-import './App.css';
+// import './App.css';
 import $ from 'jquery';
 
 
@@ -18,7 +18,7 @@ class Home extends Component {
 
       componentDidMount() {
         // let vivus = Vivus('graph', {duration: 200, file: Graph}, {})
-        new Vivus('graph', {duration: 80, file: Graph}, null)
+        new Vivus('summry_logo', {duration: 60, file: Graph, type: 'sync',}, null)
     }
 
 
@@ -133,13 +133,18 @@ class Home extends Component {
 
 
     return (
-      <div className='centered'>
+      <div className='wrap'>
 
-<div>
-                <div id="graph"></div>
+            <div>
+                <div id="summry_logo"></div>
             </div>
-            
-        <form id="form_login">
+
+            <div className="intro">
+            <p>Summry is an text summarizer built with react + python.</p>
+            <p>To get started, paste a URL or insert some text below.</p>
+            </div>
+
+        <form id="form">
           <h1> Paste a url </h1>
             <p>
               <input value={this.state.urlSummary} onChange={this.updateUrlSummary} className= "mytext" type="text" id="server" placeholder="url" />
