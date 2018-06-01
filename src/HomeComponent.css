@@ -1,35 +1,109 @@
-@import url(https://fonts.googleapis.com/css?family=Black+Han+Sans);
+/*@import url(https://fonts.googleapis.com/css?family=Josefin+Slab); */
+@import url(https://fonts.googleapis.com/css?family=Ubuntu);
+@import  url(https://fonts.googleapis.com/css?family=Montserrat);
 
 
-.outer {
-  display: flex;
-  text-align:center;
-  justify-content: center; /* center horizontally */
-  font-family:"Black Han Sans";
+overflow: scroll;
+-webkit-overflow-scrolling: touch;
+
+/*==========  Structure  ==========*/
+.btn-push {
+  position: relative;
+  top: 0px;
+  font-family: "Montserrat";
+  text-decoration: none;
+  font-size: 25px;
+  background: #99b8ff;
+  padding: 15px 50px;
+  margin: 0 10px;
+  border: 1px solid #c4c4c4;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  -webkit-box-shadow: 0px 3px 0px #c4c4c4;
+  -moz-box-shadow: 0px 3px 0px #c4c4c4;
+  -ms-box-shadow: 0px 3px 0px #c4c4c4;
+  -o-box-shadow: 0px 3px 0px #c4c4c4;
+  box-shadow: 0px 3px 0px #c4c4c4;
+  color: #222;
+  text-shadow: 1px 1px 1px #fff;
+  -webkit-transition: All 250ms ease;
+  -moz-transition: All 250ms ease;
+  -o-transition: All 250ms ease;
+  -ms-transition: All 250ms ease;
+  transition: All 250ms ease;
+}
+/*==========  Active State  ==========*/
+.btn-push:active {
+  position: relative;
+  top: 5px;
+  -webkit-box-shadow: none !important;
+  -moz-box-shadow: none !important;
+  -ms-box-shadow: none !important;
+  -o-box-shadow: none !important;
+  box-shadow: none !important;
+  -webkit-transition: All 250ms ease;
+  -moz-transition: All 250ms ease;
+  -o-transition: All 250ms ease;
+  -ms-transition: All 250ms ease;
+  transition: All 250ms ease;
 }
 
-/*.outer
-{
-  position: absolute;
-  margin: auto;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  width: 100px;
-  height: 100px;
-}*/
 
+.btn-push.blue {
+  background: #A15F47;
+  color: #A15F47;
+  border: 1px solid #177c8e;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  -webkit-box-shadow: 0px 3px 0px #177c8e;
+  -moz-box-shadow: 0px 3px 0px #177c8e;
+  -ms-box-shadow: 0px 3px 0px #177c8e;
+  -o-box-shadow: 0px 3px 0px #177c8e;
+  box-shadow: 0px 3px 0px #177c8e;
+  text-shadow: 1px 1px 1px #177c8e;
+}
+
+
+
+.centered {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  /* bring your own prefixes */
+  transform: translate(-50%, -50%);
+  font-family:"Montserrat";
+}
 
 .mytext {
-    width: 300px;
+    width: 450px;
 }
 
 .sentences {
-	width:20px;
+  width:20px;
+  height: 10;
+}
+
+
+h1 {
+  color: #A15F47
+}
+
+/* why does this control footerComponent.css */
+
+
+img {
+  width: 100px;
+  height:100px;
+}
+
+textarea {
+  width: 450px;
+  height: 300px;
 }
 
 
 
-
+/* above here is good*/
 

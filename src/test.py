@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request, redirect, Response, jsonify
+from string import ascii_lowercase
 from bs4 import BeautifulSoup
 import requests
 import json
@@ -103,10 +104,109 @@ def clean_article_text(soup):
     # return article_text[:-4]
 
 
-@app.route('/hello/', methods=['GET', 'POST'])
+@app.route('/summarize_text/', methods=['GET', 'POST'])
+def summarize_textbox():
+
+    text = request.args.get('textBoxString')
+
+    article_dict = {}
+
+    stemmer = SnowballStemmer("english")
+    stop_words = set(stopwords.words("english"))
+    words = word_tokenize(str(text))
+
+    # { word: numTimesWordAppearsInText }
+    freq_table = dict()
+    for word in words:
+        word = word.lower()
+        if word in stop_words:
+            continue
+            
+        word = stemmer.stem(word)
+
+        if word in freq_table:
+            freq_table[word] += 1
+        else:
+            freq_table[word] = 1
+            
+            
+    # { sentence: totalWordScoreFromfreq_table }
+    sentences = sent_tokenize(str(text))
+    sentence_value = dict()
+
+    for sentence in sentences:
+        for word, freq in freq_table.items():
+            if word in sentence.lower():
+                if sentence in sentence_value:
+                    sentence_value[sentence] += freq
+                else:
+                    sentence_value[sentence] = freq
+                            
+    # find "average sentence score", multiply by constant, take those above  average  
+    sum_values = 0
+    for sentence in sentence_value:
+        sum_values += sentence_value[sentence]
+
+    # Average value of a sentence from original text
+    average = int(sum_values / len(sentence_value))
+    
+    summary = ''
+    for sentence in sentences:
+        if (sentence in sentence_value) and (sentence_value[sentence] > (1.3 * average)):
+            summary += " " + sentence
+    
+    summary_list = summary.split(' ')
+    orig_length, summary_length, pct_change = percent_change(sentences, summary_list)
+    
+    
+    # get most frequent word
+    sorted_by_score = list(reversed(sorted(freq_table.items(), key=operator.itemgetter(1))))
+    lower_letters_tuple = tuple(list(ascii_lowercase))
+    mostFreqWord = []
+    for i in sorted_by_score:
+        for letters in i[0]:
+            lower_letters = letters
+            if lower_letters.startswith((lower_letters_tuple)):
+                mostFreqWord.append(i[0])
+
+    article_dict['title'] = 'Most Frequent Word: ' + mostFreqWord[0][0].upper() + mostFreqWord[0][1:]   ## need to change this!!!
+    article_dict['summary_text_string'] = summary[:-1]
+    article_dict['summary_string_length'] = summary_length
+    article_dict['orig_text'] = sentences
+    article_dict['orig_len'] = orig_length
+    article_dict['percent_change_string'] = pct_change
+
+    
+    # check for optional argument 
+    try:
+        numSentences = request.args.get('sentenceCountStr', type=int)
+    except Exception as e:
+        print(str(e))
+    ###########################  this part will break the script #######################
+
+    # if user enters "summarize article into x sentences"                
+    if numSentences:
+        summarize_by_length = summarize_by_sentence_number(sentence_value, numSentences)
+        article_dict['summary_as_list'] = summarize_by_length
+        flatten_summed_as_list = " ".join([i for i in article_dict['summary_as_list'] ]).split(' ')
+
+        orig_length_optarg, summary_length_optarg, pct_change_optarg = percent_change(sentences, flatten_summed_as_list)
+        
+        article_dict ['summary_list_length'] = summary_length_optarg
+        article_dict['pct_change_list'] = pct_change_optarg
+    ###########################  this part CAN BREAK script #######################
+    #return article_dict
+    #return jsonify(result=summary)
+    return jsonify(article_dict)
+
+
+
+
+
+@app.route('/summarize_url/', methods=['GET', 'POST'])
 def summarize_article(name=None, name1=None):
 
-    url = request.args.get('arg1')
+    url = request.args.get('urlString')
     # try:
     #     numSentences = request.args.get('arg2')
     # except Exception as e:
@@ -187,7 +287,10 @@ def summarize_article(name=None, name1=None):
     summary_list = summary.split(' ')
     orig_length, summary_length, pct_change = percent_change(sentences, summary_list)
     
-            
+    
+    
+
+
     article_dict['title'] = article_title
     article_dict['summary_text_string'] = summary[:-1] # formerly text
     article_dict['summary_string_length'] = summary_length
@@ -198,7 +301,7 @@ def summarize_article(name=None, name1=None):
     
     # check for optional argument 
     try:
-        numSentences = request.args.get('arg2', type=int)
+        numSentences = request.args.get('sentenceCountStr', type=int)
     except Exception as e:
         print(str(e))
     ###########################  this part will break the script #######################
@@ -225,4 +328,5 @@ def getTitle():
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)
+   #app.run(host='127.0.0.1', port=5000, debug=True)
 

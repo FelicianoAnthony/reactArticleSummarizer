@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link, Route, Switch } from 'react-router-dom';
 import App from './App'
 import './SummaryComponent.css'
-
+import AboutComponent from './AboutComponent'
 
 
 
@@ -41,39 +41,44 @@ class SummaryComponent extends Component {
           <div className="App" >
                     
             <ul>
-              <li><Link to={{pathname:"/"}}> Home </Link></li>
+              <li className="home-link"><Link to={{pathname:"/"}}> Home </Link></li>
+              <li className="about-link"><Link to={{pathname:"/about"}}> About  </Link> </li>
             </ul>
 
             <div className="summary-box"> 
-
-              <h1 className="article-title"> {this.props.location.state.pythonJson.title} </h1>
-
-                <p id="summary-text"> <span className="col-titles"> 
-                  Article Summarized in {this.props.location.state.sentenceCount} sentences
+              <h1 className="summary-page-titles"> {this.props.location.state.pythonJson.title} </h1>
+                <p className="summary-subheading"> ( Article Summarized in {this.props.location.state.sentenceCount} sentences ) </p>
                  <br /> 
+
+                <div> 
                 {this.props.location.state.pythonJson.summary_as_list.map(function(d, idx) {
                   return (
-                    <ul>
-                      <li key={idx} >{idx+1} <br/> {d} </li>
-                    </ul>
+                      <ul>
+                        <li key={idx} >{idx+1}. {d} </li>
+                      </ul>
                     )
                 })}   
-                </span>  </p> 
+                </div>
 
-              <div className="summary-stats">
-                <h1> Summary Statistics </h1>
-                <p> Original text - {this.props.location.state.pythonJson.orig_len} words </p>
-                <p> Summary - {this.props.location.state.pythonJson.summary_list_length} words </p>
-                <p> Percent Change - {this.props.location.state.pythonJson.pct_change_list} % </p>
+
+
+              <div>
+                <h1 className="summary-page-titles"> Summary Statistics </h1>
+                <p className = "summary-stats-text"> Original text - {this.props.location.state.pythonJson.orig_len} words </p>
+                <p className = "summary-stats-text"> Summary - {this.props.location.state.pythonJson.summary_list_length} words </p>
+                <p className = "summary-stats-text">  Percent Change - {this.props.location.state.pythonJson.pct_change_list} % </p>
+                <button className="btn-push blue" type="button"onClick={this.handleClick}> {text} </button>
               </div>
 
-              <li><button onClick={this.handleClick}> {text} </button></li>
+             
+
+
            </div>  
 
            {!this.state.clicked ?
             <div className="summary-box-orig"> 
               <h1 className="article-title-orig"> {this.props.location.state.pythonJson.title} </h1>
-                <p id="summary-text"> <span className="col-titles"> Original Text <br /> </span>
+                <p className="summary-subheading"> <span className="col-titles"> Original Text <br /> </span>
                 {this.props.location.state.pythonJson.orig_text.map(function(d, idx) {
                   return (
                     <ul>
@@ -90,6 +95,7 @@ class SummaryComponent extends Component {
 
             <Switch>
               <Route exact path="/" component={App}/>
+              <Route exact path="/about" component={AboutComponent} />
             </Switch>
 
           </div>
